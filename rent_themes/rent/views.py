@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import *
+from .services import Util
 
 
 #Página inicial com a lista de clientes
@@ -195,12 +196,20 @@ class RentViews:
                  state = request.POST['state'] )
         a.save()
         
+        # Nossas alterações
+        theme = Theme.objects.get(id=request.POST['select_theme'])
+        theme_price = theme.price
+        cliet = Client.objects.get(id=request.POST['select_client'])
+        rent_value = Util.calcular_desconto(request.POST['date'], theme_price, cliet)
+
         r = Rent(date=request.POST['date'], 
                  start_hours=request.POST['start_hours'],
                  end_hours=request.POST['end_hours'],
                  client_id= request.POST['select_client'],
                  theme_id = request.POST['select_theme'],
-                 address = a )
+                 address = a,
+                 value = rent_value)
+        
         r.save()
         return redirect('/listRent')
 

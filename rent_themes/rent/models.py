@@ -6,6 +6,8 @@ from django.db.models.deletion import CASCADE
 class Client(models.Model):
     name = models.CharField(max_length=60, blank=False)
     email = models.CharField(max_length=60, blank=True)
+    first_purchase = models.BooleanField(default=True)
+
     def __str__(self):
         return self.name
 
