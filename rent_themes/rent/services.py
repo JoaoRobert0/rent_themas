@@ -1,4 +1,5 @@
 from datetime import datetime
+from .models import Rent
 
 class Util():
     def calcular_desconto(date_rent, theme_price, client):
@@ -10,11 +11,8 @@ class Util():
         if day_of_week in [0, 1, 2, 3]:
             discount += 0.40
 
-        if not client.first_purchase:
+        if Rent.objects.filter(client=client).exists():
             discount += 0.10
-        
-        client.first_purchase = False
-        client.save()
         
         value_with_discount = theme_price * (1 - discount)
         
