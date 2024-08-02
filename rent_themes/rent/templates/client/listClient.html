@@ -9,6 +9,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nome</th>
+                        <th scope="col">Primeiro alugel</th>
                         <th scope="col">Ações</th>
                         <th scope="col"></th>
                     </tr>
@@ -17,6 +18,7 @@
                     <tr>
                         <td>{{client.id}}</td>
                         <td>{{client.name}}</td>
+                        <td>{{client.first_purchase}}</td>
                         <td width='80'><a href="/deleteClient/{{client.id}}">Excluir</a></td>
                         <td><a href="/detailClient/{{client.id}}">Editar</a></td>
                         
